@@ -57,9 +57,10 @@ class GoogleLogin extends Component {
     }
     if (!this.state.disabled) {
       const auth2 = window.gapi.auth2.getAuthInstance();
-      const { redirectUri, onSuccess, onRequest, fetchBasicProfile, onFailure, prompt, scope, responseType } = this.props;
+      const { redirectUri, onSuccess, onRequest, fetchBasicProfile, onFailure, prompt, scope, responseType, accessType } = this.props;
       const options = {
         response_type: responseType,
+        access_type: accessType,
         redirect_uri: redirectUri,
         fetch_basic_profile: fetchBasicProfile,
         prompt,
@@ -166,6 +167,7 @@ GoogleLogin.propTypes = {
   disabled: PropTypes.bool,
   discoveryDocs: PropTypes.array,
   responseType: PropTypes.string,
+  accessType: PropTypes.string,
   uxMode: PropTypes.string,
   isSignedIn: PropTypes.bool,
 };
@@ -175,6 +177,7 @@ GoogleLogin.defaultProps = {
   buttonText: 'Login with Google',
   scope: 'profile email',
   responseType: 'permission',
+  accessType: 'online',
   prompt: '',
   cookiePolicy: 'single_host_origin',
   fetchBasicProfile: true,
